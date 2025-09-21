@@ -10,7 +10,8 @@
             order.Add(5, 6); // 30 total = 44
             var shoppingCenter = new ShoppingCartService();
             var shoppingCenterRefactoring= new ShoppingCartServisecRefactoring();
-
+            shoppingCenter.CalculateTotalPriceWithQuantities("Regular", order);
+            shoppingCenterRefactoring.CalculateTotalPriceWithQuantities("Regular", order);
         }
     }
 }
