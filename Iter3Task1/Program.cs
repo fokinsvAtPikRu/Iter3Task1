@@ -4,7 +4,13 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Dictionary<decimal,int> order = new Dictionary<decimal,int>();
+            order.Add(1, 2); // 2
+            order.Add(3, 4); // 12
+            order.Add(5, 6); // 30 total = 44
+            var shoppingCenter = new ShoppingCartService();
+            var shoppingCenterRefactoring= new ShoppingCartServisecRefactoring();
+
         }
     }
 }

@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace Iter3Task1
 {
+    // класс не содержит полей и свойств, поэтому все экземпляры этого класса будут одинаковыми
+    // поэтому нет смысла делать несколько экземпляров этого класса
+    // я бы сделал класс статическим
+    // единственое что оправдывает делать класс динамическим - экономия ресурсов, если этот класс не будет
+    // использоваться - он не будет создан, под него не выделятся ресурсы
     public class ShoppingCartService
     {
-        // KISS лучше чтобы метод принимал в качестве параметра скидку или метод для вычисления скидки, а не тип клиента        
+               
         public decimal CalculateTotalPrice(string customerType, List<decimal> itemPrices)
         {
-            decimal baseTotal = 0;            
+            decimal baseTotal = 0;
+            // лишний цикл, сумму покупок можно было посчитать в предыдущем цикле
+            // лучше использовать не цикл а LINQ
             for (int i = 0; i < itemPrices.Count; i++)
             {
                 baseTotal += itemPrices[i];
@@ -48,10 +55,18 @@ namespace Iter3Task1
             Console.WriteLine($"Base: {baseTotal}, Discount: {discount}, Final: {finalPrice}");
             return finalPrice;
         }
-
+        // KISS лучше чтобы метод принимал в качестве параметра скидку или метод для вычисления скидки, а не тип клиента 
         public decimal CalculateTotalPriceWithQuantities(string customerType, Dictionary<decimal, int> itemsWithQuantities)
         {
+            // не понял почему покупки храним в словаре
+            // навряд ли список покупок одного клиента настолько велик и нам нужен поиск по покупкам за 
+            // линейное время, я бы использовал сразу List
+            // тогда не потребовалорсь бы переводить словарь в список
+            // и этот метод был бы не нужен
             List<decimal> allPrices = new List<decimal>();
+            // в цикле словарь мапится в список без полезной фунциональности
+            // в этом цикле сразу можно посчитать сумму покупок
+            // лучше использовать LINQ
             foreach (var item in itemsWithQuantities)
             {
                 for (int i = 0; i < item.Value; i++)
