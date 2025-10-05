@@ -5,7 +5,7 @@
         private const string FileName="notification.log";        
         public void Log(string recipient)
         {
-            File.AppendAllText("log.txt", $"Отправлено уведомление для {recipient}");
+            File.AppendAllText("log.txt", $"{DateTime.Now.ToString()} - Отправлено уведомление для {recipient}\n");
         }
     }
 }

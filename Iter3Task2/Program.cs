@@ -6,6 +6,9 @@ namespace Iter3Task2
         static void Main(string[] args)
         {
             ServiceCollection services = new ServiceCollection();
+            // общение с пользователем надо вынести отсюда, нарушен принцип SRP
+            // но так как у нас нет отдельного слоя для UI не стал усложнять, оставил здесь
+            // понимая ошибочность такого решения
             bool isChecked = false;
             while (!isChecked)
             {
@@ -26,7 +29,6 @@ namespace Iter3Task2
                     }
                 }
             }
-
             
             services.AddSingleton<NotificationService>();
 
@@ -39,9 +41,6 @@ namespace Iter3Task2
             var service = provider.GetRequiredService<NotificationService>();
             var loger = provider.GetRequiredService<LoginService>();
 
-
-            //var service = new NotificationService();
-            //ILoger loger = new FileLoger("notification.log");
             service.SendNotification("Ваш заказ готов", "user@example.com");
             loger.Log("user@example.com");
         }
