@@ -2,16 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Iter3Task4
 {
     internal class RevitRepository : IRevitRepository
     {
-        public List<T> GetElementsCurrentDocument<T>(Document doc)
+        private Document _doc;
+        public RevitRepository(Document doc) 
         {
-            return new FilteredElementCollector(doc)
+            _doc = doc;        
+        }
+        public List<T> GetElementsCurrentDocument<T>()
+        {
+            return new FilteredElementCollector(_doc)
                 .OfClass(typeof(T))
                 .OfType<T>()
                 .ToList();
